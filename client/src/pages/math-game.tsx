@@ -319,66 +319,66 @@ export default function MathGame() {
   if (gameState === 'playing') {
     return (
       <div className="h-screen bg-gradient-to-br from-skyblue to-turquoise flex flex-col overflow-hidden" onKeyPress={handleKeyPress}>
+        {/* Motivational Message and Problem Counter - TOP PRIORITY */}
+        <div className="bg-sunny p-4 text-center border-b-4 border-orange-400 shadow-lg">
+          <div className="text-darkblue font-fredoka text-xl font-bold mb-2">
+            Try to answer as many as you can! Can you beat 20 problems?
+          </div>
+          <div className="text-coral font-fredoka text-2xl font-bold">
+            Problems Solved: <span className="text-3xl text-green-600">{correctAnswers}</span>
+          </div>
+        </div>
+
         {/* Timer and Score Header */}
-        <div className="flex justify-between items-center p-4 bg-white/20 backdrop-blur-sm">
+        <div className="flex justify-between items-center p-3 bg-white/20 backdrop-blur-sm">
           <div className="flex items-center space-x-3">
             <div className="bg-white rounded-xl p-2 shadow-lg">
-              <Clock className="w-6 h-6 text-coral" />
+              <Clock className="w-5 h-5 text-coral" />
             </div>
             <div>
               <div className="text-white text-sm font-semibold">Time</div>
-              <div className="text-2xl font-fredoka text-white">{formatTime(timeRemaining)}</div>
+              <div className="text-xl font-fredoka text-white">{formatTime(timeRemaining)}</div>
             </div>
           </div>
           
           <div className="flex items-center space-x-3">
             <div className="bg-white rounded-xl p-2 shadow-lg">
-              <Star className="w-6 h-6 text-sunny" />
+              <Star className="w-5 h-5 text-sunny" />
             </div>
             <div>
               <div className="text-white text-sm font-semibold">Score</div>
-              <div className="text-2xl font-fredoka text-white">{currentScore}</div>
+              <div className="text-xl font-fredoka text-white">{currentScore}</div>
             </div>
-          </div>
-        </div>
-
-        {/* Motivational Message and Problem Counter */}
-        <div className="bg-sunny/90 p-3 text-center">
-          <div className="text-darkblue font-fredoka text-lg mb-1">
-            Try to answer as many as you can! Can you beat 20 problems?
-          </div>
-          <div className="text-coral font-fredoka text-xl font-bold">
-            You got <span className="text-2xl mx-1">{correctAnswers}</span> right!
           </div>
         </div>
 
         {/* Main Game Area */}
-        <div className="flex-1 flex flex-row p-4 gap-6 min-h-0">
-          {/* Left Side - Math Problem */}
+        <div className="flex-1 flex flex-col lg:flex-row gap-4 p-4 min-h-0">
+          {/* Math Problem Section */}
           <div className="flex-1 flex items-center justify-center">
-            <div className="bg-white rounded-3xl shadow-2xl p-8 text-center max-w-md w-full">
-              <h2 className="text-xl font-fredoka text-darkblue mb-6">Solve this problem!</h2>
+            <div className="bg-white rounded-3xl shadow-2xl p-6 text-center max-w-md w-full">
+              <h2 className="text-lg font-fredoka text-darkblue mb-4">Solve this problem!</h2>
               
               {/* Math problem display with proper vertical alignment */}
-              <div className="text-center mb-6">
+              <div className="text-center mb-4">
                 <div className="inline-block text-right font-mono">
-                  <div className="text-5xl md:text-6xl font-bold text-darkblue mb-2 leading-tight">{currentProblem.firstNumber}</div>
+                  <div className="text-4xl md:text-5xl font-bold text-darkblue mb-2 leading-tight">{currentProblem.firstNumber}</div>
                   <div className="flex items-center justify-end mb-2">
-                    <span className="text-5xl md:text-6xl font-bold text-darkblue mr-2">+</span>
-                    <span className="text-5xl md:text-6xl font-bold text-darkblue leading-tight">{currentProblem.secondNumber}</span>
+                    <span className="text-4xl md:text-5xl font-bold text-darkblue mr-2">+</span>
+                    <span className="text-4xl md:text-5xl font-bold text-darkblue leading-tight">{currentProblem.secondNumber}</span>
                   </div>
                   <div className="border-t-4 border-darkblue mt-2 mb-4 w-full"></div>
                 </div>
               </div>
 
               {/* Answer Input */}
-              <div className="mb-6">
+              <div className="mb-4">
                 <input 
                   type="number" 
                   value={userAnswer}
                   onChange={(e) => setUserAnswer(e.target.value)}
                   placeholder="Answer"
-                  className="w-full max-w-xs mx-auto px-4 py-3 text-2xl text-center border-4 border-mint rounded-2xl focus:border-coral focus:outline-none focus:ring-4 focus:ring-coral/20 transition-all duration-300 font-mono"
+                  className="w-full max-w-xs mx-auto px-4 py-3 text-xl text-center border-4 border-mint rounded-2xl focus:border-coral focus:outline-none focus:ring-4 focus:ring-coral/20 transition-all duration-300 font-mono"
                   autoFocus
                 />
               </div>
@@ -386,7 +386,7 @@ export default function MathGame() {
               {/* Submit Button */}
               <button 
                 onClick={submitAnswer}
-                className="w-full bg-gradient-to-r from-green-500 to-green-600 text-white text-xl font-fredoka py-3 px-8 rounded-2xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-green-500/50"
+                className="w-full bg-gradient-to-r from-green-500 to-green-600 text-white text-lg font-fredoka py-3 px-6 rounded-2xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-green-500/50"
               >
                 <Banknote className="inline-block w-5 h-5 mr-2" />
                 Put it in the bank!
@@ -394,25 +394,25 @@ export default function MathGame() {
             </div>
           </div>
 
-          {/* Right Side - Feedback */}
-          <div className="w-80 flex items-center justify-center">
-            <div className="bg-white rounded-3xl shadow-2xl p-6 h-96 w-full flex flex-col">
-              <h3 className="text-lg font-fredoka text-darkblue mb-4 text-center">Feedback</h3>
+          {/* Feedback Section */}
+          <div className="lg:w-80 flex items-center justify-center">
+            <div className="bg-white rounded-3xl shadow-2xl p-4 h-64 lg:h-80 w-full max-w-md lg:max-w-none flex flex-col">
+              <h3 className="text-lg font-fredoka text-darkblue mb-3 text-center">Feedback</h3>
               
               <div className="flex-1 flex flex-col justify-center items-center text-center">
                 {feedback ? (
-                  <div className={`w-full rounded-xl p-4 border-2 ${
+                  <div className={`w-full rounded-xl p-3 border-2 ${
                     feedback.type === 'correct' ? 'bg-green-100 border-green-300' :
                     feedback.type === 'incorrect' ? 'bg-yellow-100 border-yellow-300' :
                     'bg-red-100 border-red-300'
                   }`}>
-                    <div className="text-5xl mb-3">{feedback.emoji}</div>
-                    <p className="text-lg font-semibold text-darkblue">{feedback.message}</p>
+                    <div className="text-4xl mb-2">{feedback.emoji}</div>
+                    <p className="text-base font-semibold text-darkblue">{feedback.message}</p>
                   </div>
                 ) : (
                   <>
-                    <div className="text-5xl mb-3">🎯</div>
-                    <p className="text-lg text-gray-600">Submit your answer!</p>
+                    <div className="text-4xl mb-2">🎯</div>
+                    <p className="text-base text-gray-600">Submit your answer!</p>
                   </>
                 )}
               </div>
