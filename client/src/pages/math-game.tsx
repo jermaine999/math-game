@@ -60,6 +60,7 @@ export default function MathGame() {
   const [feedback, setFeedback] = useState<{type: string, message: string, emoji: string} | null>(null);
   const [isNewHighScore, setIsNewHighScore] = useState(false);
   const [personalBest, setPersonalBest] = useState(0);
+  const [correctAnswers, setCorrectAnswers] = useState(0);
 
   // API queries and mutations
   const { data: leaderboard = [] } = useQuery({
@@ -154,6 +155,7 @@ export default function MathGame() {
     setSelectedGameMode(gameMode);
     setGameState('playing');
     setCurrentScore(0);
+    setCorrectAnswers(0);
     setTimeRemaining(180);
     setFeedback(null);
     setUserAnswer('');
@@ -174,6 +176,7 @@ export default function MathGame() {
     
     if (answer === currentProblem.answer) {
       setCurrentScore(prev => prev + 20);
+      setCorrectAnswers(prev => prev + 1);
       setFeedback({
         type: 'correct',
         message: 'Excellent! Well done!',
@@ -211,6 +214,7 @@ export default function MathGame() {
   const resetGame = () => {
     setGameState('start');
     setCurrentScore(0);
+    setCorrectAnswers(0);
     setTimeRemaining(180);
     setFeedback(null);
     setUserAnswer('');
@@ -335,6 +339,16 @@ export default function MathGame() {
               <div className="text-white text-sm font-semibold">Score</div>
               <div className="text-2xl font-fredoka text-white">{currentScore}</div>
             </div>
+          </div>
+        </div>
+
+        {/* Motivational Message and Problem Counter */}
+        <div className="bg-sunny/90 p-3 text-center">
+          <div className="text-darkblue font-fredoka text-lg mb-1">
+            Try to answer as many as you can! Can you beat 20 problems?
+          </div>
+          <div className="text-coral font-fredoka text-xl font-bold">
+            You got <span className="text-2xl mx-1">{correctAnswers}</span> right!
           </div>
         </div>
 
